@@ -17,7 +17,11 @@ compile:
 	
 	@echo "$(COLOR_OK)Compiling...$(COLOR_CLEAR)"
 	@$(CC) $(SOURCE_DIRECTORY)*.h $(SOURCE_DIRECTORY)*.cpp $(CFLAGS) -o $(OUTPUT_DIRECTORY)$(BINARY_NAME)
-	
+
+install:
+	@echo "$(COLOR_WHITE)Installing..."
+	@sudo cp ./bin/dmake /usr/bin/dmake
+	@echo "$(COLOR_OK)Done"
 
 clean:
 	rm -rf $(OUTPUT_DIRECTORY)
