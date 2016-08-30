@@ -3,8 +3,41 @@
 #include "colors.h"
 #include "dmake.h"
 #include "languages.h"
+#include "clp.h"
+
+void Compile 	();
+
 
 int main (int argc, char* argv[])
+{
+	
+	// Evaluate the parameters given to dmake
+	Evaluate (argc, argv);
+	
+	for (int f = 0; f < options.size(); f++)
+	{
+		Option flag = options[f];
+		
+		if (flag == COMPILE)
+		{
+			Compile ();
+		}
+		else
+		if (flag == INSTALL)
+		{
+			Install ();
+		}
+		else
+		if (flag == CLEAN)
+		{
+			Clean ();
+		}
+	}
+	
+	return 0;
+}
+
+void Compile ()
 {
 	FSNode* rootDirectory = new FSNode;
 	rootDirectory->name = "./src";
@@ -23,6 +56,11 @@ int main (int argc, char* argv[])
 	project->Compile ();
 	
 	project->Clean ();
-	
-	return 0;
 }
+
+
+void Clean ()
+{
+	std::cout << BOLD << WHITE << "Cleaning..." << RESET << std::endl;
+}
+

@@ -1,9 +1,75 @@
 #include "dmake.h"
 
 
+bool IsRoot ()
+{
+	return getuid() == 0;
+}
 
-
-
+void Install ()
+{
+	pstring title;
+	title << BOLD << CYAN << "[" << MAGENTA << "INST" << CYAN << "]" << RESET;
+	
+	cout << title << " Installing..." << RESET << endl;
+	
+	if (!IsRoot())
+	{
+		cout 	<< title
+				<< BOLD << CYAN << " [" << RED << "ERR!" << CYAN << "]" << RESET
+				<< " You must be root user to install using dmake." << endl;
+		
+		return;
+	}
+	
+	// Get the binary to copy
+	DIR* dir;
+	dirent* pdir;
+	
+	dir = opendir("./bin/");
+	
+	vector<string> binaryFiles;
+	
+	while (pdir = readdir(dir))
+	{
+		if (pdir->d_type == DT_REG)
+		{
+			binaryFiles.push_back (pdir->d_name);
+		}
+	}
+	
+	/*
+		Only works for binary files as of this moment!
+		This code will soon have to check whether or not it is a binary file or a library
+														(eg. .so for linux and .dylib for OSX)
+	*/
+	for (int i = 0; i < binaryFiles.size (); i++)
+	{
+		string file = binaryFiles[i];
+		
+		pstring command;
+		command << "cp ./bin/" << file << " " << INSTALL_DIRECTORY;
+		
+		//cout << command << endl;
+		
+		cout << title << " " << file << " -> " << INSTALL_DIRECTORY << endl;
+		
+		system (command.c_str());
+	}
+	
+	/* 	TODO:
+		
+		In the future we want to be able to install libraries
+					(eg. .so for linux and .dylib for OSX)
+		
+		we also want to be able to install libraries along side of executables
+		
+		permission changing would also be nice
+		
+	*/
+	
+	cout << title << " Success!" << endl;
+}
 
 
 void ProjectCSharp::GenerateRequired ()

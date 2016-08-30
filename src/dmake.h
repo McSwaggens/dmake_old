@@ -2,6 +2,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <vector>
 #include <sys/types.h>
 #include <dirent.h>
@@ -18,6 +19,7 @@ using namespace std;
 #define CS_COMPILER_GNU_LINUX "xbuild"
 #define OUTPUT_DIRECTORY "./bin/"
 #define OUTPUT_EXECUTABLE_NAME "program" // To be changed into static variable
+#define INSTALL_DIRECTORY "/usr/bin/" // Unix install directory
 
 /*---- LANGUAGE TALLY ----*/
 static int tally_cpp;
@@ -78,6 +80,11 @@ static vector<FSFile*> total_files;
 
 
 /*---- Methods ----*/
+
+void Install ();
+
+void Clean ();
+
 FSFile* ToFSFile (dirent* dir);
 
 void CheckRequiredDirectories ();
@@ -93,3 +100,4 @@ vector<string> Split (string str, char splitter);
 Language FindLanguage ();
 
 Project* GenerateProject (Language* language);
+
