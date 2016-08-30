@@ -24,7 +24,11 @@ int main (int argc, char* argv[])
 		else
 		if (flag == INSTALL)
 		{
-			Install ();
+			bool success = Install ();
+			if (!success)
+			{
+				return 0;
+			}
 		}
 		else
 		if (flag == CLEAN)

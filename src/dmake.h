@@ -87,7 +87,7 @@ string GetProjectName ();
 
 string GetWorkingDirectory ();
 
-void Install ();
+bool Install ();
 
 void Clean ();
 

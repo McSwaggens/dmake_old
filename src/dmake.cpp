@@ -24,7 +24,7 @@ bool IsRoot ()
 	return getuid() == 0;
 }
 
-void Install ()
+bool Install ()
 {
 	pstring title;
 	title << BOLD << CYAN << "[" << MAGENTA << "INST" << CYAN << "]" << RESET;
@@ -37,7 +37,7 @@ void Install ()
 				<< BOLD << CYAN << " [" << RED << "ERR!" << CYAN << "]" << RESET
 				<< " You must be root user to install using dmake." << endl;
 		
-		return;
+		return false;
 	}
 	
 	// Get the binary to copy
@@ -87,6 +87,8 @@ void Install ()
 	*/
 	
 	cout << title << " Success!" << endl;
+	
+	return true;
 }
 
 
