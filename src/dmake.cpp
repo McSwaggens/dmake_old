@@ -52,7 +52,7 @@ void ProjectCPP::Compile ()
 		
 		// COMPILE CPP FILE
 		cout << title << " Compiling " << cppFile->name << ".cpp -> "
-			<< cppFile->extension << ".o" << endl;
+			<< cppFile->name << ".o" << endl;
 		
 		string path;
 		cppFile->parent->CollectParentNameRecursive(&path);
