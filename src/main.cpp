@@ -10,9 +10,8 @@ void Compile 	();
 
 int main (int argc, char* argv[])
 {
-	
 	// Evaluate the parameters given to dmake
-	Evaluate (argc, argv);
+	vector<Option> options = Evaluate (argc, argv);
 	
 	for (int f = 0; f < options.size(); f++)
 	{

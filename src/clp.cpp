@@ -1,7 +1,9 @@
 #include "clp.h"
 
-void Evaluate (int argc, char* argv[])
+std::vector<Option> Evaluate (int argc, char* argv[])
 {
+	std::vector<Option> options;
+	
 	if (argc == 1)
 	{
 		options.push_back (COMPILE);
@@ -21,4 +23,6 @@ void Evaluate (int argc, char* argv[])
 			options.push_back (CLEAN);
 		}
 	}
+	
+	return options;
 }

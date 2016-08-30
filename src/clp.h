@@ -10,6 +10,4 @@ enum Option
 	CLEAN
 };
 
-static std::vector<Option> options;
-
-void Evaluate (int argc, char* argv[]);
+std::vector<Option> Evaluate (int argc, char* argv[]);
