@@ -2,6 +2,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include <unistd.h>
 #include <vector>
 #include <sys/types.h>
@@ -18,7 +19,6 @@ using namespace std;
 #define CPP_COMPILER_GNU_LINUX "g++"
 #define CS_COMPILER_GNU_LINUX "xbuild"
 #define OUTPUT_DIRECTORY "./bin/"
-#define OUTPUT_EXECUTABLE_NAME "program" // To be changed into static variable
 #define INSTALL_DIRECTORY "/usr/bin/" // Unix install directory
 
 /*---- LANGUAGE TALLY ----*/
@@ -78,8 +78,14 @@ static Project* project;
 
 static vector<FSFile*> total_files;
 
+static string projectName;
+
 
 /*---- Methods ----*/
+
+string GetProjectName ();
+
+string GetWorkingDirectory ();
 
 void Install ();
 

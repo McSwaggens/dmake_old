@@ -1,6 +1,24 @@
 #include "dmake.h"
 
 
+string GetProjectName ()
+{
+	string workingDirectory = GetWorkingDirectory ();
+	
+	vector<string> _split = Split (workingDirectory, '/');
+	
+	string projectName = _split[_split.size()-1];
+	
+	return projectName;
+}
+
+string GetWorkingDirectory ()
+{
+	char cCurrentPath[FILENAME_MAX];
+	getcwd(cCurrentPath, sizeof(cCurrentPath));
+	return string(cCurrentPath);
+}
+
 bool IsRoot ()
 {
 	return getuid() == 0;
@@ -110,6 +128,8 @@ void ProjectCPP::Compile ()
 	pstring title;
 	title << BOLD << CYAN << "[" << MAGENTA << "CPP" << CYAN << "]" << RESET;
 	
+	projectName = GetProjectName ();
+	
 	pstring objects;
 	
 	for (int i = 0; i < this->cppFiles.size(); i++)
@@ -137,10 +157,10 @@ void ProjectCPP::Compile ()
 	
 	pstring link_command;
 	link_command << CPP_COMPILER_GNU_LINUX << " -w " << objects << "-o "
-					<< OUTPUT_DIRECTORY << OUTPUT_EXECUTABLE_NAME;
+					<< OUTPUT_DIRECTORY << projectName;
 	
 	cout << title << " Linking object files -> " << OUTPUT_DIRECTORY
-			<< OUTPUT_EXECUTABLE_NAME << endl;
+			<< projectName << endl;
 	
 	system (link_command.c_str());
 }
