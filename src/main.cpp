@@ -41,14 +41,19 @@ void Compile ()
 	FSNode* rootDirectory = new FSNode;
 	rootDirectory->name = "./src";
 	
+	bool directoryCheckSuccess = CheckRequiredDirectories ();
+	
+	if (!directoryCheckSuccess)
+	{
+		return;
+	}
+	
 	Scan (rootDirectory);
 	
 	Language language = FindLanguage ();
 	
 	Project* project;
 	project = GenerateProject (&language);
-	
-	CheckRequiredDirectories ();
 	
 	project->GenerateRequired ();
 	

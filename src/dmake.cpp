@@ -224,9 +224,18 @@ FSFile* ToFSFile (dirent* dir)
 }
 
 
-void CheckRequiredDirectories ()
+bool CheckRequiredDirectories ()
 {
 	cout << BOLD << WHITE << "Initializing..." << endl;
+	
+	if (!DirectoryExists("./src/"))
+	{
+		cout 	<< BOLD << CYAN << "[" << RED << "ERR!" << CYAN << "]" << RESET
+				<< " You aren't inside of a valid dmake project directory!"
+				<< endl << "...Missing ./src/ directory..." << endl;
+		
+		return false;
+	}
 	
 	/* Binary Directory */
 	if (DirectoryExists("./bin/"))
@@ -241,6 +250,8 @@ void CheckRequiredDirectories ()
 		system ("rm -rf ./obj/");
 	}
 	system ("mkdir ./obj/");
+	
+	return true;
 }
 
 

@@ -93,7 +93,7 @@ void Clean ();
 
 FSFile* ToFSFile (dirent* dir);
 
-void CheckRequiredDirectories ();
+bool CheckRequiredDirectories ();
 
 void ScanProjectType ();
 
