@@ -13,6 +13,10 @@ std::vector<Option> Evaluate (int argc, char* argv[])
 	{
 		std::string str (argv[i]);
 		
+		if (str == "compile")
+		{
+			options.push_back (COMPILE);
+		}
 		if (str == "install")
 		{
 			options.push_back (INSTALL);
