@@ -12,6 +12,7 @@
 #include "colors.h"
 #include "languages.h"
 #include "pstring.h"
+#include "parser.h"
 
 using namespace std;
 
@@ -42,6 +43,7 @@ struct ProjectCPP : public Project
 	virtual void Compile ();
 	virtual void GenerateRequired ();
 	virtual void Clean ();
+	string* libs;
 	vector<FSFile*> cppFiles;
 	vector<FSFile*> headerFiles;
 };
@@ -100,6 +102,8 @@ void ScanProjectType ();
 void Scan (FSNode* node);
 
 bool DirectoryExists(const char* pzPath);
+
+bool FileExists (string directory, string file);
 
 vector<string> Split (string str, char splitter);
 

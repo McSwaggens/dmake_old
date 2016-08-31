@@ -110,6 +110,13 @@ void ProjectCSharp::Clean ()
 
 void ProjectCPP::GenerateRequired ()
 {
+	this->libs = new string("");
+	
+	if (FileExists ("./", "dlibs"))
+	{
+		this->libs = new string(Parser::GenerateGPPLibraryParameters ("./dlibs"));
+	}
+	
 	for (int i = 0; i < total_files.size(); i++)
 	{
 		FSFile* file = total_files[i];
@@ -153,8 +160,11 @@ void ProjectCPP::Compile ()
 		cppFile->parent->CollectParentNameRecursiveExcludeRoot(&path_no_root);
 		
 		pstring command;
-		command << CPP_COMPILER_GNU_LINUX << " -w -c " << path << cppFile->name << "." << cppFile->extension << " -o ./obj/"
+		command << CPP_COMPILER_GNU_LINUX << " -w -c " << path << cppFile->name << "." << cppFile->extension << " " << *this->libs << "-o ./obj/"
 				 << cppFile->name << ".o";
+		
+		//Uncomment to see the compile commands sent to the shell
+		//cout << title << BOLD << YELLOW << " COMPILE->" << command << RESET << endl;
 		
 		system (command.c_str());
 		
@@ -162,11 +172,14 @@ void ProjectCPP::Compile ()
 	}
 	
 	pstring link_command;
-	link_command << CPP_COMPILER_GNU_LINUX << " -w " << objects << "-o "
+	link_command << CPP_COMPILER_GNU_LINUX << " -w " << objects << *this->libs << "-o "
 					<< OUTPUT_DIRECTORY << projectName;
 	
 	cout << title << " Linking object files -> " << OUTPUT_DIRECTORY
 			<< projectName << endl;
+	
+	//Uncomment to see the compile commands sent to the shell
+	//cout << title << BOLD << YELLOW << " linker->" << link_command << RESET << endl;
 	
 	system (link_command.c_str());
 }
@@ -277,6 +290,24 @@ bool DirectoryExists( const char* pzPath )
     }
 
     return bExists;
+}
+
+bool FileExists (string directory, string file)
+{
+    DIR* dir;
+	dirent* pdir;
+	
+	dir = opendir(directory.c_str ());
+	
+	while (pdir = readdir(dir))
+	{
+		if (pdir->d_type == DT_REG && pdir->d_name == file)
+		{
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 
