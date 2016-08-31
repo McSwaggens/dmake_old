@@ -7,7 +7,8 @@ enum Option
 {
 	COMPILE,
 	INSTALL,
-	CLEAN
+	CLEAN,
+	RUN
 };
 
 std::vector<Option> Evaluate (int argc, char* argv[]);

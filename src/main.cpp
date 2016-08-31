@@ -31,6 +31,11 @@ int main (int argc, char* argv[])
 			}
 		}
 		else
+		if (flag == RUN)
+		{
+			Run ();
+		}
+		else
 		if (flag == CLEAN)
 		{
 			Clean ();

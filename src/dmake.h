@@ -93,6 +93,8 @@ bool Install ();
 
 void Clean ();
 
+void Run ();
+
 FSFile* ToFSFile (dirent* dir);
 
 bool CheckRequiredDirectories ();

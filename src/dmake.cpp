@@ -92,6 +92,16 @@ bool Install ()
 }
 
 
+void Run ()
+{
+	string projectName = GetProjectName();
+	pstring binaryPath;
+	binaryPath << OUTPUT_DIRECTORY << projectName;
+	
+	system (binaryPath.c_str());
+}
+
+
 void ProjectCSharp::GenerateRequired ()
 {
 }
