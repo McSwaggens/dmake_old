@@ -117,6 +117,10 @@ void ProjectCPP::GenerateRequired ()
 		{
 			this->cppFiles.push_back (file);
 		}
+		if (file->extension == "c") // Treat C files as CPP files
+		{
+			this->cppFiles.push_back (file);
+		}
 		else
 		if (file->extension == "h")
 		{
@@ -139,7 +143,7 @@ void ProjectCPP::Compile ()
 		FSFile* cppFile = this->cppFiles[i];
 		
 		// COMPILE CPP FILE
-		cout << title << " Compiling " << cppFile->name << ".cpp -> "
+		cout << title << " Compiling " << cppFile->name << "." << cppFile->extension << " -> "
 			<< cppFile->name << ".o" << endl;
 		
 		string path;
@@ -149,7 +153,7 @@ void ProjectCPP::Compile ()
 		cppFile->parent->CollectParentNameRecursiveExcludeRoot(&path_no_root);
 		
 		pstring command;
-		command << CPP_COMPILER_GNU_LINUX << " -w -c " << path << cppFile->name << ".cpp -o ./obj/"
+		command << CPP_COMPILER_GNU_LINUX << " -w -c " << path << cppFile->name << "." << cppFile->extension << " -o ./obj/"
 				 << cppFile->name << ".o";
 		
 		system (command.c_str());
