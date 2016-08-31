@@ -1,3 +1,5 @@
+#ifndef __PSTRING_H_
+#define __PSTRING_H_
 #include <string>
 
 class pstring : public std::string {
@@ -13,3 +15,4 @@ public:
         return *this;
     }
 };
+#endif
