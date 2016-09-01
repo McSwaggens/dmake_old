@@ -170,7 +170,7 @@ void ProjectCPP::Compile ()
 		cppFile->parent->CollectParentNameRecursiveExcludeRoot(&path_no_root);
 		
 		pstring command;
-		command << CPP_COMPILER_GNU_LINUX << " -w -c " << path << cppFile->name << "." << cppFile->extension << " " << *this->libs << "-o ./obj/"
+		command << CPP_COMPILER_GNU_LINUX << " -w -c " << path << cppFile->name << "." << cppFile->extension << " -std=c++11 " << *this->libs << "-o ./obj/"
 				 << cppFile->name << ".o";
 		
 		//Uncomment to see the compile commands sent to the shell
@@ -182,7 +182,7 @@ void ProjectCPP::Compile ()
 	}
 	
 	pstring link_command;
-	link_command << CPP_COMPILER_GNU_LINUX << " -w " << objects << *this->libs << "-o "
+	link_command << CPP_COMPILER_GNU_LINUX << " -w -std=c++11 " << objects << *this->libs << "-o "
 					<< OUTPUT_DIRECTORY << projectName;
 	
 	cout << title << " Linking object files -> " << OUTPUT_DIRECTORY
