@@ -39,7 +39,7 @@ sudo make install
 
 ## About
 
-Daniel Jones – [McSwaggens](https://github.com/McSwaggens/) – McSwaggens@protonmail.com
+Daniel Jones – [McSwaggens](https://github.com/McSwaggens/)
 
 Copyright 2016 Daniel Jones
 
